@@ -15,7 +15,7 @@
 
 
 ### Description
-♪Alt-13 (pronounced alt thirteen) is a blockchain and cryptocurrency with the following intentions:
+♪Alt-13 is a blockchain, cryptocurrency, and ecosystem with the following intentions:
 * Nodes are owned and operated by section 501(c)(3) charitable, educational, 
    and scientific corporations.
 * The network is capable of transaction throughput levels that can 
