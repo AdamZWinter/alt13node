@@ -9,6 +9,7 @@ import org.springframework.test.web.servlet.MockMvc;
 @SpringBootTest
 class SpringProject372ApplicationTests {
 
+	//run tests
 	@Test
 	void contextLoads() {
 	}
@@ -17,5 +18,6 @@ class SpringProject372ApplicationTests {
 	void accountTest(){
 		Account account = new Account("emailAddress");
 	}
+
 
 }
