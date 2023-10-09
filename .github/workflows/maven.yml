@@ -55,4 +55,6 @@ jobs:
       - name: Checkout submodules
         run: git submodule update --init --recursive
       - run: npm install --prefix alt13front
+      - run: npm install --prefix alt13front create-react-app
+      - run: npm install --prefix alt13front react-router-dom
       - run: npm run --prefix alt13front build
