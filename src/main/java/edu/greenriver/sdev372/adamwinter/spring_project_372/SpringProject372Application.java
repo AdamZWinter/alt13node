@@ -5,6 +5,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
+/**
+ * This the main entry point into the Spring Boot application
+ * it is the standard default implementation created by the Spring Boot framework
+ */
 @SpringBootApplication
 public class SpringProject372Application {
 

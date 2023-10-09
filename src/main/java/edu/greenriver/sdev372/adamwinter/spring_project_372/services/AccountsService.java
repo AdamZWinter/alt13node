@@ -15,6 +15,10 @@ public class AccountsService {
 
     private IAccountsRepository repo;
 
+    /**
+     * Service constructor for the bean
+     * @param repo  this will be instantiated automatically by the Spring Boot framework
+     */
     public AccountsService(IAccountsRepository repo) {
         this.repo = repo;
     }

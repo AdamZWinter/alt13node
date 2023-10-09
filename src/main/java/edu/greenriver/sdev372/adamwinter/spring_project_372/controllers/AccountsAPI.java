@@ -23,6 +23,10 @@ public class AccountsAPI {
 
     private AccountsService service;
 
+    /**
+     * defines a route that is currently useless except for testing
+     * @return for testing returns an email address
+     */
     @GetMapping(path = "email")
     public String accountEmail(){
         return service.getEmail();

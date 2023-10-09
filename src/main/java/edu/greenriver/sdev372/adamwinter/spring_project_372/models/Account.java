@@ -24,6 +24,10 @@ public class Account {
 
     private String email;
 
+    /**
+     * Represents a user account
+     * @param email an email address for the user
+     */
     public Account(String email) {
         this.email = email;
     }
