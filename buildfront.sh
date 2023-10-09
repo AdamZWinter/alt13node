@@ -6,6 +6,7 @@ git pull origin main
 
 #npm install
 #npm install react-scripts
+#npm install react-router-dom
 
 npm run build
 

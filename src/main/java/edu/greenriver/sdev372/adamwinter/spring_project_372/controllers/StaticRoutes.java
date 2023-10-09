@@ -12,7 +12,18 @@ public class StaticRoutes {
      * @return redirect in the form of a String
      */
     @GetMapping(path = "home.html")
+    public String redirectHomeHtml(){
+        return "redirect:/";
+    }
+
+
+    /**
+     * Redirects a request to home to the default home page of React app
+     *
+     * @return redirect in the form of a String
+     */
+    @GetMapping(path = "home")
     public String redirectHome(){
-        return "redirect:/index.html";
+        return "redirect:/";
     }
 }
