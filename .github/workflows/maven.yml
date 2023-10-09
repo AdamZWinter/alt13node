@@ -53,5 +53,5 @@ jobs:
           node-version: 18
       - name: Checkout submodules
         run: git submodule update --init --recursive
-      - name: Build npm build
-        run: npm run --prefix alt13front build
+      - run: npm install --prefix alt13front
+      - run: npm run --prefix alt13front build
