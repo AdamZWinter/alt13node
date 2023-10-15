@@ -1,5 +1,8 @@
 package edu.greenriver.sdev372.adamwinter.spring_project_372.models;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -12,6 +15,10 @@ public class Block implements IBlock{
     int startTime;
     int endTime;
     String previousBlock;
+
+    @Getter
+    @Setter
+    int blockId;  //this will be null until the block is added to the chain
 
     public Block(int startTime, int endTime, String previousBlock) {
         this.startTime = startTime;
@@ -39,5 +46,9 @@ public class Block implements IBlock{
         byte[] hashBytes =digest.digest(thisBlockString.getBytes(StandardCharsets.UTF_8));
         Base64.Encoder encoder = Base64.getEncoder();
         return encoder.encodeToString(hashBytes);
+    }
+
+    public Set<ITransaction> getAllTransactions(){
+        return transactionSet;
     }
 }
