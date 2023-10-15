@@ -17,12 +17,14 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Account {
+public class Account implements IAccount{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     private String email;
+    private String publicKey;
+    private double balance;
 
     /**
      * Represents a user account
@@ -30,5 +32,6 @@ public class Account {
      */
     public Account(String email) {
         this.email = email;
+        balance = 100.00;
     }
 }
