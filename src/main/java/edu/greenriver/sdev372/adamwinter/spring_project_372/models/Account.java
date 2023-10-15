@@ -30,8 +30,19 @@ public class Account implements IAccount{
      * Represents a user account
      * @param email an email address for the user
      */
-    public Account(String email) {
+    public Account(String email, String publicKey) {
         this.email = email;
+        this.publicKey = publicKey;
         balance = 100.00;
+    }
+
+    @Override
+    public String toString() {
+        return "Account{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", publicKey='" + publicKey + '\'' +
+                ", balance=" + balance +
+                '}';
     }
 }

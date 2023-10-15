@@ -24,7 +24,7 @@ public class AccountsService {
     }
 
     public String getEmail(){
-        String email = new Account("fake").getEmail();
+        String email = new Account("fake", "placholder").getEmail();
         return email;
     }
 }

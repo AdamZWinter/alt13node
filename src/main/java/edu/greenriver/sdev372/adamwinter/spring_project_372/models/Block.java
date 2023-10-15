@@ -16,20 +16,6 @@ public class Block implements IBlock{
     int endTime;
     String previousBlock;
 
-    @Getter
-    @Setter
-    int blockId;  //this will be null until the block is added to the chain
-
-    public Block(int startTime, int endTime, String previousBlock) {
-        this.startTime = startTime;
-        this.endTime = endTime;
-        this.previousBlock = previousBlock;
-    }
-
-    public boolean addTransaction(ITransaction transaction){
-        return transactionSet.add(transaction);
-    }
-
     @Override
     public String toString() {
         return "Block{" +
@@ -37,7 +23,23 @@ public class Block implements IBlock{
                 ", startTime=" + startTime +
                 ", endTime=" + endTime +
                 ", previousBlock='" + previousBlock + '\'' +
+                ", blockId=" + blockId +
                 '}';
+    }
+
+    @Getter
+    @Setter
+    int blockId;  //this will be -1 until the block is added to the chain
+
+    public Block(int startTime, int endTime, String previousBlock) {
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.previousBlock = previousBlock;
+        this.blockId = -1;
+    }
+
+    public boolean addTransaction(ITransaction transaction){
+        return transactionSet.add(transaction);
     }
 
     public String getHash() throws NoSuchAlgorithmException {
@@ -51,4 +53,5 @@ public class Block implements IBlock{
     public Set<ITransaction> getAllTransactions(){
         return transactionSet;
     }
+
 }

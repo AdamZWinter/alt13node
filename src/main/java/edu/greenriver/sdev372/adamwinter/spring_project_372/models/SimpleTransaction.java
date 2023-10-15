@@ -17,7 +17,7 @@ public class SimpleTransaction implements ITransaction{
 
     @Getter
     @Setter
-    private int blockId;  //This will be null until the block is added to the chain
+    private int blockId;  //This will be -1 until the block is added to the chain
 
     public SimpleTransaction(String accountId, int transactionId, String recipientId, double amount, int uTime, String extra, String base64encodedSignature) {
         this.accountId = accountId;
@@ -27,7 +27,20 @@ public class SimpleTransaction implements ITransaction{
         this.uTime = uTime;
         this.extra = extra;
         this.base64encodedSignature = base64encodedSignature;
+        this.blockId = -1;
     }
 
-
+    @Override
+    public String toString() {
+        return "SimpleTransaction{" +
+                "accountId='" + accountId + '\'' +
+                ", transactionId=" + transactionId +
+                ", recipientId='" + recipientId + '\'' +
+                ", amount=" + amount +
+                ", uTime=" + uTime +
+                ", extra='" + extra + '\'' +
+                ", base64encodedSignature='" + base64encodedSignature + '\'' +
+                ", blockId=" + blockId +
+                '}';
+    }
 }

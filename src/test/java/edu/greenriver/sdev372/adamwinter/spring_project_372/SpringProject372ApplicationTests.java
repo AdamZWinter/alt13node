@@ -16,7 +16,7 @@ class SpringProject372ApplicationTests {
 
 	@Test
 	void accountTest(){
-		Account account = new Account("emailAddress");
+		Account account = new Account("emailAddress", "publicKeyplaceholder");
 	}
 
 

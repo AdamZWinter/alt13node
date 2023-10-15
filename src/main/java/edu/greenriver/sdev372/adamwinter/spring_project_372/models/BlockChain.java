@@ -37,4 +37,11 @@ public class BlockChain implements IBlockChain {
     public List<IBlock> getAllBlocks(){
         return listOfBlocks;
     }
+
+    @Override
+    public String toString() {
+        return "BlockChain{" +
+                "listOfBlocks=" + listOfBlocks +
+                '}';
+    }
 }
