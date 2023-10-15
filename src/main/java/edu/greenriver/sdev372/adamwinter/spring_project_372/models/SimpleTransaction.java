@@ -7,8 +7,11 @@ import lombok.Setter;
 
 public class SimpleTransaction implements ITransaction{
 
+    @Getter
     private String accountId;
     private int transactionId;
+
+    @Getter
     private String recipientId;
     private double amount;
     private int uTime;

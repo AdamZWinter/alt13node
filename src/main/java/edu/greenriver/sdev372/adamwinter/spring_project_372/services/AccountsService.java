@@ -2,7 +2,10 @@ package edu.greenriver.sdev372.adamwinter.spring_project_372.services;
 
 import edu.greenriver.sdev372.adamwinter.spring_project_372.db.IAccountsRepository;
 import edu.greenriver.sdev372.adamwinter.spring_project_372.models.Account;
+import edu.greenriver.sdev372.adamwinter.spring_project_372.models.IBlockChain;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.stereotype.Service;
 
 /**
@@ -12,8 +15,11 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class AccountsService {
-
     private IAccountsRepository repo;
+
+    @Getter
+    @Setter
+    private IBlockChain blockChain;
 
     /**
      * Service constructor for the bean
