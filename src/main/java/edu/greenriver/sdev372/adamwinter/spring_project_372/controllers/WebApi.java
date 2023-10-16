@@ -4,7 +4,11 @@ import edu.greenriver.sdev372.adamwinter.spring_project_372.models.Account;
 import edu.greenriver.sdev372.adamwinter.spring_project_372.models.IBlock;
 import edu.greenriver.sdev372.adamwinter.spring_project_372.services.InMemoryService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.NoSuchElementException;
 
 /**
  *  This class declares routes to HTTP resources.
@@ -25,8 +29,12 @@ public class WebApi {
      * @return Account
      */
     @GetMapping(path = "accounts/{email}")
-    public String getAccountByEmail(@PathVariable String email){
-        return service.getAccountByEmail(email).toString();
+    public ResponseEntity<String> getAccountByEmail(@PathVariable String email){
+        try {
+            return new ResponseEntity<>(service.getAccountByEmail(email).toString(), HttpStatus.OK);
+        } catch (NoSuchElementException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
     }
 
     @PostMapping(path = "accounts")
