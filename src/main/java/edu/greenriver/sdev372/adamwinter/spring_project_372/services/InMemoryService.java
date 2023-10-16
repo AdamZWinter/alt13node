@@ -25,11 +25,6 @@ public class InMemoryService {
 
     private IBlock activeBlock;
 
-
-//    public void setBlockChain(IBlockChain blockChain) {
-//        this.blockChain = blockChain;
-//    }
-
     public void setBlockChain(IBlockChain blockChain, IBlock genesisBlock) {
         this.blockChain = blockChain;
         this.activeBlock = genesisBlock;
@@ -37,10 +32,7 @@ public class InMemoryService {
 
     public void addTransaction(ITransaction transaction){
         long unixTimestamp = Instant.now().getEpochSecond();
-        //IBlock currentBlock = blockChain.getCurrentBlock();
-        //long currentEndTime = currentBlock.getEndTime();
         long currentEndTime = activeBlock.getEndTime();
-        //String previousHash;
         IBlock previousBlock;
         if(unixTimestamp > currentEndTime){
             //System.out.println("Creating new block");
@@ -60,30 +52,6 @@ public class InMemoryService {
             activeBlock.addTransaction(transaction);
         }
     }
-
-//    public void addTransaction(ITransaction transaction){
-//        long unixTimestamp = Instant.now().getEpochSecond();
-//        IBlock currentBlock = blockChain.getCurrentBlock();
-//        long currentEndTime = currentBlock.getEndTime();
-//        String previousHash;
-//        if(unixTimestamp > currentEndTime){
-//            //System.out.println("Creating new block");
-//            try {
-//                previousHash = currentBlock.getHash();
-//                System.out.println(previousHash);
-//            } catch (NoSuchAlgorithmException e) {
-//                throw new RuntimeException(e);
-//            }
-//            long nextStartTime = unixTimestamp;
-//            long nextEndTime = nextStartTime + blockTime - 1;
-//            IBlock nextBlock = new Block(nextStartTime, nextEndTime, previousHash);
-//            nextBlock.addTransaction(transaction);
-//            blockChain.addBlock(nextBlock);
-//        }else{
-//            //System.out.println("Adding to existing block.");
-//            currentBlock.addTransaction(transaction);
-//        }
-//    }
 
     public boolean addAccount(IAccount account){
         return accountSet.add(account);
