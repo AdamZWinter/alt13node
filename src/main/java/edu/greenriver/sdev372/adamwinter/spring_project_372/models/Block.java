@@ -31,7 +31,7 @@ public class Block implements IBlock{
 
     @Getter
     @Setter
-    int blockId;  //this will be -1 until the block is added to the chain
+    long blockId;  //this will be -1 until the block is added to the chain
 
     public Block(long startTime, long endTime, String previousBlockHash) {
         this.transactionSet = new HashSet<>();

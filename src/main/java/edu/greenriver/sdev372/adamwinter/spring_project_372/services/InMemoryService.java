@@ -49,8 +49,8 @@ public class InMemoryService {
         }
     }
 
-    public void addAccount(IAccount account){
-        accountSet.add(account);
+    public boolean addAccount(IAccount account){
+        return accountSet.add(account);
     }
 
     public IAccount getAccountByEmail(String email) throws NoSuchElementException {
@@ -79,12 +79,20 @@ public class InMemoryService {
         return allTransactions;
     }
 
-//    /**
-//     * Service constructor for the bean
-//     * @param repo  this will be instantiated automatically by the Spring Boot framework
-//     */
-//    public AccountsService(IRepository repo) {
-//        this.repo = repo;
+    public boolean updatePublicKeyByEmail(IAccount account){
+        Iterator itr = accountSet.iterator();
+        while(itr.hasNext()){
+            IAccount nextAccount = (IAccount) itr.next();
+            if(account.getEmail().compareTo(nextAccount.getEmail()) == 0){
+                nextAccount.setPublicKey(account.getPublicKey());
+                return true;
+            }
+        }
+        return false;
+    }
+
+//    public String getBlockById(int ){
+//
 //    }
 
 }

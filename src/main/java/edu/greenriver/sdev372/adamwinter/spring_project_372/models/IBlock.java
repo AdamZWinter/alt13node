@@ -5,7 +5,7 @@ import java.util.Set;
 
 public interface IBlock {
 
-    void setBlockId(int blockId);
+    void setBlockId(long blockId);
     int getBlockId();
     boolean addTransaction(ITransaction transaction);
     Set<ITransaction> getAllTransactions();

@@ -1,12 +1,9 @@
 package edu.greenriver.sdev372.adamwinter.spring_project_372.controllers;
 
-import edu.greenriver.sdev372.adamwinter.spring_project_372.services.AccountsService;
+import edu.greenriver.sdev372.adamwinter.spring_project_372.models.Account;
 import edu.greenriver.sdev372.adamwinter.spring_project_372.services.InMemoryService;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  *  This class declares routes to HTTP resources.
@@ -31,6 +28,15 @@ public class WebApi {
         return service.getAccountByEmail(email).toString();
     }
 
+    @PostMapping(path = "accounts")
+    public boolean createAccount(@RequestBody Account account){
+        return service.addAccount(account);
+    }
+
+    @PutMapping(path = "accounts")
+    public boolean updatePublicKeyByEmail(@RequestBody Account account){
+        return service.updatePublicKeyByEmail(account);
+    }
 
 
 }
