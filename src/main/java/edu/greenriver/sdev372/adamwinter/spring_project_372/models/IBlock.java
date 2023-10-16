@@ -6,7 +6,7 @@ import java.util.Set;
 public interface IBlock {
 
     void setBlockId(long blockId);
-    int getBlockId();
+    long getBlockId();
     boolean addTransaction(ITransaction transaction);
     Set<ITransaction> getAllTransactions();
     String getHash() throws NoSuchAlgorithmException;

@@ -1,6 +1,7 @@
 package edu.greenriver.sdev372.adamwinter.spring_project_372.controllers;
 
 import edu.greenriver.sdev372.adamwinter.spring_project_372.models.Account;
+import edu.greenriver.sdev372.adamwinter.spring_project_372.models.IBlock;
 import edu.greenriver.sdev372.adamwinter.spring_project_372.services.InMemoryService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -36,6 +37,11 @@ public class WebApi {
     @PutMapping(path = "accounts")
     public boolean updatePublicKeyByEmail(@RequestBody Account account){
         return service.updatePublicKeyByEmail(account);
+    }
+
+    @GetMapping("blocks/{id}")
+    public IBlock getBlockById(@PathVariable int id){
+        return service.getBlockById(id);
     }
 
 

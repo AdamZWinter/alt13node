@@ -40,14 +40,16 @@ public class SpringProject372Application {
 		inMemoryService.addAccount(new Account(user3, "publicKeyPlaceholder"));
 
 		long unixTimestamp = Instant.now().getEpochSecond();
-		long startTime = unixTimestamp - (unixTimestamp % BLOCK_TIME);
-		long endTime = startTime + BLOCK_TIME - 1;
+		//long startTime = unixTimestamp - (unixTimestamp % BLOCK_TIME);
+		//long endTime = startTime + BLOCK_TIME - 1;
+		long startTime = unixTimestamp;
+		long endTime = unixTimestamp;
 		Block genesisBlock = new Block(startTime, endTime, "Genesis");
 
 		//Java documentation says that LinkedList is a doubly-linked list
 		//and that it searches by index starting at either the head or the tail
 		//depending on which the index is closer to
-		inMemoryService.setBlockChain(new BlockChain(new LinkedList<>(), genesisBlock));
+		inMemoryService.setBlockChain(new BlockChain(new LinkedList<>()), genesisBlock);
 
 
 		System.out.println(inMemoryService.getAccountByEmail(user1));

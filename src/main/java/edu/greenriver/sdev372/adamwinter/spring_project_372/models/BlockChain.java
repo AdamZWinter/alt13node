@@ -8,9 +8,13 @@ public class BlockChain implements IBlockChain {
 
     List<IBlock> listOfBlocks;
 
-    public BlockChain(List<IBlock> listOfBlocks, IBlock genesisBlock) {
+//    public BlockChain(List<IBlock> listOfBlocks, IBlock genesisBlock) {
+//        this.listOfBlocks = listOfBlocks;
+//        addBlock(genesisBlock);
+//    }
+
+    public BlockChain(List<IBlock> listOfBlocks) {
         this.listOfBlocks = listOfBlocks;
-        addBlock(genesisBlock);
     }
 
     public int addBlock(IBlock block){
