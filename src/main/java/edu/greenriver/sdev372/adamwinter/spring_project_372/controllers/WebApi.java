@@ -38,6 +38,11 @@ public class WebApi {
         }
     }
 
+    /**
+     * defines a route to create an account with POST
+     * @param account specified in request body in JSON format
+     * @return ResponseEntity<Boolean> CREATED or CONFLICT status
+     */
     @PostMapping(path = "accounts")
     public ResponseEntity<Boolean> createAccount(@RequestBody Account account){
         try {
@@ -47,7 +52,11 @@ public class WebApi {
         }
     }
 
-
+    /**
+     *
+     * @param account
+     * @return
+     */
     @PutMapping(path = "accounts")
     public ResponseEntity<Boolean> updatePublicKeyByEmail(@RequestBody Account account){
         try {
