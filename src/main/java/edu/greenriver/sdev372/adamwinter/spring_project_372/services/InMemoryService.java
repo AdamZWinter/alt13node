@@ -1,5 +1,6 @@
 package edu.greenriver.sdev372.adamwinter.spring_project_372.services;
 
+import edu.greenriver.sdev372.adamwinter.spring_project_372.db.IRepository;
 import edu.greenriver.sdev372.adamwinter.spring_project_372.models.*;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,6 +13,8 @@ import java.util.*;
 @Service
 @NoArgsConstructor
 public class InMemoryService {
+
+    //private IAccountsRepository repo;
 
     @Setter
     private IBlockChain blockChain;
@@ -76,5 +79,12 @@ public class InMemoryService {
         return allTransactions;
     }
 
+//    /**
+//     * Service constructor for the bean
+//     * @param repo  this will be instantiated automatically by the Spring Boot framework
+//     */
+//    public AccountsService(IRepository repo) {
+//        this.repo = repo;
+//    }
 
 }

@@ -1,19 +1,14 @@
 package edu.greenriver.sdev372.adamwinter.spring_project_372;
 
-import edu.greenriver.sdev372.adamwinter.spring_project_372.db.IAccountsRepository;
 import edu.greenriver.sdev372.adamwinter.spring_project_372.models.*;
-import edu.greenriver.sdev372.adamwinter.spring_project_372.services.AccountsService;
 import edu.greenriver.sdev372.adamwinter.spring_project_372.services.InMemoryService;
-import jakarta.transaction.Transaction;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
-import java.sql.Date;
 import java.time.Instant;
 import java.util.HashSet;
 import java.util.LinkedList;
-import java.util.Set;
 
 /**
  * This the main entry point into the Spring Boot application
