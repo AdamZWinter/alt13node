@@ -22,7 +22,6 @@ public class Block implements IBlock{
     @Override
     public String toString() {
         return "Block{" +
-                "transactionSet=" + transactionSet +
                 ", startTime=" + startTime +
                 ", endTime=" + endTime +
                 ", previousBlock='" + previousBlockHash + '\'' +

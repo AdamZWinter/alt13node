@@ -28,16 +28,20 @@ public class InMemoryService {
         long currentEndTime = currentBlock.getEndTime();
         String previousHash;
         if(unixTimestamp > currentEndTime){
+            System.out.println("Creating new block");
             try {
                 previousHash = currentBlock.getHash();
+                System.out.println(previousHash);
             } catch (NoSuchAlgorithmException e) {
                 throw new RuntimeException(e);
             }
             long nextStartTime = unixTimestamp;
             long nextEndTime = nextStartTime + blockTime - 1;
             IBlock nextBlock = new Block(nextStartTime, nextEndTime, previousHash);
-
+            nextBlock.addTransaction(transaction);
+            blockChain.addBlock(nextBlock);
         }else{
+            System.out.println("Adding to existing block.");
             currentBlock.addTransaction(transaction);
         }
     }
@@ -65,7 +69,7 @@ public class InMemoryService {
         for (IBlock block : allBlocks) {
             System.out.println(block);
             for (ITransaction transaction : block.getAllTransactions()) {
-                System.out.println(transaction);
+                //System.out.println(transaction);
                 allTransactions.add(transaction);
             }
         }

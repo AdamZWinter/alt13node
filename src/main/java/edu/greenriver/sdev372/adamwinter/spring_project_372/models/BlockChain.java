@@ -28,12 +28,12 @@ public class BlockChain implements IBlockChain {
     }
 
     public long getEndTime(){
-        IBlock block = listOfBlocks.get(0);
+        IBlock block = listOfBlocks.get(listOfBlocks.size()-1);
         return block.getEndTime();
     }
 
     public IBlock getCurrentBlock(){
-        IBlock currentBlock = listOfBlocks.get(0);
+        IBlock currentBlock = listOfBlocks.get(listOfBlocks.size()-1);
         return currentBlock;
     }
 
