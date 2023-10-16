@@ -1,6 +1,5 @@
 package edu.greenriver.sdev372.adamwinter.spring_project_372.models;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,7 +13,9 @@ public class SimpleTransaction implements ITransaction{
     @Getter
     private String recipientId;
     private double amount;
-    private int uTime;
+
+    @Getter
+    private long uTime;
     private String extra;
     private String base64encodedSignature;
 
@@ -22,7 +23,7 @@ public class SimpleTransaction implements ITransaction{
     @Setter
     private int blockId;  //This will be -1 until the block is added to the chain
 
-    public SimpleTransaction(String accountId, int transactionId, String recipientId, double amount, int uTime, String extra, String base64encodedSignature) {
+    public SimpleTransaction(String accountId, int transactionId, String recipientId, double amount, long uTime, String extra, String base64encodedSignature) {
         this.accountId = accountId;
         this.transactionId = transactionId;
         this.recipientId = recipientId;

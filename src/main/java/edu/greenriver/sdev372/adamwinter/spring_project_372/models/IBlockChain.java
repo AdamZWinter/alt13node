@@ -8,5 +8,7 @@ public interface IBlockChain {
     IBlock getBlockbyId(int id);
     int getLatestBlockId();
     List<IBlock> getAllBlocks();
+    long getEndTime();
+    IBlock getCurrentBlock();
 
 }

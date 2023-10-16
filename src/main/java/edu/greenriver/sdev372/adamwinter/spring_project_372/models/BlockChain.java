@@ -8,8 +8,9 @@ public class BlockChain implements IBlockChain {
 
     List<IBlock> listOfBlocks;
 
-    public BlockChain(List<IBlock> listOfBlocks) {
+    public BlockChain(List<IBlock> listOfBlocks, IBlock genesisBlock) {
         this.listOfBlocks = listOfBlocks;
+        addBlock(genesisBlock);
     }
 
     public int addBlock(IBlock block){
@@ -24,6 +25,16 @@ public class BlockChain implements IBlockChain {
         }else{
             return -1;
         }
+    }
+
+    public long getEndTime(){
+        IBlock block = listOfBlocks.get(0);
+        return block.getEndTime();
+    }
+
+    public IBlock getCurrentBlock(){
+        IBlock currentBlock = listOfBlocks.get(0);
+        return currentBlock;
     }
 
     public IBlock getBlockbyId(int id){

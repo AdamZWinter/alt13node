@@ -10,4 +10,6 @@ public interface IBlock {
     boolean addTransaction(ITransaction transaction);
     Set<ITransaction> getAllTransactions();
     String getHash() throws NoSuchAlgorithmException;
+
+    long getEndTime();
 }

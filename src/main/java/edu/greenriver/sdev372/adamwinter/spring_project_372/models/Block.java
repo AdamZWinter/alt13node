@@ -12,9 +12,11 @@ import java.util.Set;
 public class Block implements IBlock{
 
     Set<ITransaction> transactionSet;
-    int startTime;
-    int endTime;
-    String previousBlock;
+    long startTime;
+
+    @Getter
+    long endTime;
+    String previousBlockHash;
 
     @Override
     public String toString() {
@@ -22,7 +24,7 @@ public class Block implements IBlock{
                 "transactionSet=" + transactionSet +
                 ", startTime=" + startTime +
                 ", endTime=" + endTime +
-                ", previousBlock='" + previousBlock + '\'' +
+                ", previousBlock='" + previousBlockHash + '\'' +
                 ", blockId=" + blockId +
                 '}';
     }
@@ -31,10 +33,10 @@ public class Block implements IBlock{
     @Setter
     int blockId;  //this will be -1 until the block is added to the chain
 
-    public Block(int startTime, int endTime, String previousBlock) {
+    public Block(long startTime, long endTime, String previousBlockHash) {
         this.startTime = startTime;
         this.endTime = endTime;
-        this.previousBlock = previousBlock;
+        this.previousBlockHash = previousBlockHash;
         this.blockId = -1;
     }
 
