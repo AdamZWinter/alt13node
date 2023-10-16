@@ -76,8 +76,8 @@ public class InMemoryService {
         throw new NoSuchElementException("There is no account with this email address.");
     }
 
-    public Set<ITransaction> getCurrentTransactions(){
-        return blockChain.getCurrentBlock().getAllTransactions();
+    public Set<ITransaction> getNewTransactions(){
+        return activeBlock.getAllTransactions();
     }
 
     public Set<ITransaction> getAllTransactions(){

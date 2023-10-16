@@ -36,6 +36,9 @@ Additional goals:
 * There is a built-in platform for businesses to take credit payments from customers through
   established relationships with lenders.
 
+## API Documentation:
+*  https://documenter.getpostman.com/view/30297477/2s9YR83Cd4
+
 ## How to:
 * Running ./buildfront.sh will pull the submodule repo for the React app frontend, build it, 
   and copy the build into the static resources directory.

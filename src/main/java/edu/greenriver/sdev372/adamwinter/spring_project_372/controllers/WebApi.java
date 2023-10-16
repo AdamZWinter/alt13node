@@ -53,9 +53,9 @@ public class WebApi {
     }
 
     /**
-     *
-     * @param account
-     * @return
+     * difines a route to PUT/Update the public key for an account
+     * @param account specified in request body in JSON format
+     * @return ResponseEntity<Boolean> HttpStatus ACCEPTED or NOT_FOUND
      */
     @PutMapping(path = "accounts")
     public ResponseEntity<Boolean> updatePublicKeyByEmail(@RequestBody Account account){
@@ -87,6 +87,11 @@ public class WebApi {
     @GetMapping("transactions")
     public ResponseEntity<Set<ITransaction>> getAllTransactions(){
         return new ResponseEntity<>(service.getAllTransactions(),HttpStatus.OK);
+    }
+
+    @GetMapping("transactions/new")
+    public ResponseEntity<Set<ITransaction>> getNewTransactions(){
+        return new ResponseEntity<>(service.getNewTransactions(),HttpStatus.OK);
     }
 
 
