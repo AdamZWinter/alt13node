@@ -53,7 +53,12 @@ public class InMemoryService {
         }
     }
 
-    public boolean addAccount(IAccount account){
+    public boolean addAccount(IAccount account) throws Exception{
+        for (IAccount existingAccount : accountSet) {
+            if(existingAccount.getEmail().compareTo(account.getEmail()) == 0 ){
+                throw new Exception("Account with this email already exists.");
+            }
+        }
         return accountSet.add(account);
     }
 
@@ -83,7 +88,7 @@ public class InMemoryService {
         return allTransactions;
     }
 
-    public boolean updatePublicKeyByEmail(IAccount account){
+    public boolean updatePublicKeyByEmail(IAccount account) throws NoSuchElementException{
         Iterator itr = accountSet.iterator();
         while(itr.hasNext()){
             IAccount nextAccount = (IAccount) itr.next();
@@ -92,11 +97,15 @@ public class InMemoryService {
                 return true;
             }
         }
-        return false;
+        throw new NoSuchElementException("No such account.");
     }
 
-    public IBlock getBlockById(int id){
-        return blockChain.getBlockbyId(id);
+    public IBlock getBlockById(int id) throws NoSuchElementException{
+        try {
+            return blockChain.getBlockbyId(id);
+        } catch (IndexOutOfBoundsException e) {
+            throw new NoSuchElementException(e);
+        }
     }
 
 }

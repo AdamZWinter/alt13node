@@ -1,6 +1,7 @@
 package edu.greenriver.sdev372.adamwinter.spring_project_372.controllers;
 
 import edu.greenriver.sdev372.adamwinter.spring_project_372.models.Account;
+import edu.greenriver.sdev372.adamwinter.spring_project_372.models.Block;
 import edu.greenriver.sdev372.adamwinter.spring_project_372.models.IBlock;
 import edu.greenriver.sdev372.adamwinter.spring_project_372.services.InMemoryService;
 import lombok.AllArgsConstructor;
@@ -38,18 +39,31 @@ public class WebApi {
     }
 
     @PostMapping(path = "accounts")
-    public boolean createAccount(@RequestBody Account account){
-        return service.addAccount(account);
+    public ResponseEntity<Boolean> createAccount(@RequestBody Account account){
+        try {
+            return new ResponseEntity<>(service.addAccount(account), HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(false, HttpStatus.CONFLICT);
+        }
     }
 
+
     @PutMapping(path = "accounts")
-    public boolean updatePublicKeyByEmail(@RequestBody Account account){
-        return service.updatePublicKeyByEmail(account);
+    public ResponseEntity<Boolean> updatePublicKeyByEmail(@RequestBody Account account){
+        try {
+            return new ResponseEntity<>(service.updatePublicKeyByEmail(account), HttpStatus.ACCEPTED);
+        } catch (NoSuchElementException e) {
+            return new ResponseEntity<>(false, HttpStatus.NOT_FOUND);
+        }
     }
 
     @GetMapping("blocks/{id}")
-    public IBlock getBlockById(@PathVariable int id){
-        return service.getBlockById(id);
+    public ResponseEntity<IBlock> getBlockById(@PathVariable int id){
+        try {
+            return new ResponseEntity<>(service.getBlockById(id),HttpStatus.OK);
+        } catch (NoSuchElementException e) {
+            return new ResponseEntity<>(new Block(0, 0, "Not Found"), HttpStatus.NOT_FOUND);
+        }
     }
 
 

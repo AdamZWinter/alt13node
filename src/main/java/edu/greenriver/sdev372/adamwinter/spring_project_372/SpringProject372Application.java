@@ -35,9 +35,14 @@ public class SpringProject372Application {
 		String user2 = "user2@email.com";
 		String user3 = "user3@email.com";
 
-		inMemoryService.addAccount(new Account(user1, "publicKeyPlaceholder"));
-		inMemoryService.addAccount(new Account(user2, "publicKeyPlaceholder"));
-		inMemoryService.addAccount(new Account(user3, "publicKeyPlaceholder"));
+
+		try {
+			inMemoryService.addAccount(new Account(user1, "publicKeyPlaceholder"));
+			inMemoryService.addAccount(new Account(user2, "publicKeyPlaceholder"));
+			inMemoryService.addAccount(new Account(user3, "publicKeyPlaceholder"));
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
 
 		long unixTimestamp = Instant.now().getEpochSecond();
 		//long startTime = unixTimestamp - (unixTimestamp % BLOCK_TIME);

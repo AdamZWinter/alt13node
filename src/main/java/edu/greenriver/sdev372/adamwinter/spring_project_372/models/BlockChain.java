@@ -38,7 +38,7 @@ public class BlockChain implements IBlockChain {
 
     public IBlock getBlockbyId(int id){
         return listOfBlocks.get(id);
-    }
+    }  //Throws IndexOutOfBoundsException
 
     public int getLatestBlockId(){
         return listOfBlocks.size() - 1;
