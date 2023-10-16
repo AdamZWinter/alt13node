@@ -7,9 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.security.NoSuchAlgorithmException;
 import java.time.Instant;
-import java.util.NoSuchElementException;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @Service
 @NoArgsConstructor
@@ -39,6 +37,8 @@ public class InMemoryService {
             long nextEndTime = nextStartTime + blockTime - 1;
             IBlock nextBlock = new Block(nextStartTime, nextEndTime, previousHash);
 
+        }else{
+            currentBlock.addTransaction(transaction);
         }
     }
 
@@ -53,6 +53,23 @@ public class InMemoryService {
             }
         }
         throw new NoSuchElementException("There is no account with this email address.");
+    }
+
+    public Set<ITransaction> getCurrentTransactions(){
+        return blockChain.getCurrentBlock().getAllTransactions();
+    }
+
+    public Set<ITransaction> getAllTransactions(){
+        List<IBlock> allBlocks = blockChain.getAllBlocks();
+        Set<ITransaction> allTransactions = new HashSet<>();
+        for (IBlock block : allBlocks) {
+            System.out.println(block);
+            for (ITransaction transaction : block.getAllTransactions()) {
+                System.out.println(transaction);
+                allTransactions.add(transaction);
+            }
+        }
+        return allTransactions;
     }
 
 

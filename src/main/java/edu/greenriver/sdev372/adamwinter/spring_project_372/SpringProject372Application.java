@@ -85,6 +85,10 @@ public class SpringProject372Application {
 		inMemoryService.addTransaction(simpleTransaction2);
 		inMemoryService.addTransaction(simpleTransaction3);
 
+		System.out.println(inMemoryService.getAccountByEmail(user1));
+
+		System.out.println(inMemoryService.getAllTransactions());
+
 	}
 
 }

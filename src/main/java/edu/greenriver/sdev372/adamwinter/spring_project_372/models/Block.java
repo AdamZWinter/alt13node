@@ -7,6 +7,7 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
+import java.util.HashSet;
 import java.util.Set;
 
 public class Block implements IBlock{
@@ -34,6 +35,7 @@ public class Block implements IBlock{
     int blockId;  //this will be -1 until the block is added to the chain
 
     public Block(long startTime, long endTime, String previousBlockHash) {
+        this.transactionSet = new HashSet<>();
         this.startTime = startTime;
         this.endTime = endTime;
         this.previousBlockHash = previousBlockHash;
