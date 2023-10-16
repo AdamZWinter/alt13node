@@ -1,5 +1,6 @@
 package edu.greenriver.sdev372.adamwinter.spring_project_372.services;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import edu.greenriver.sdev372.adamwinter.spring_project_372.db.IRepository;
 import edu.greenriver.sdev372.adamwinter.spring_project_372.models.*;
 import lombok.NoArgsConstructor;
@@ -28,9 +29,13 @@ public class InMemoryService {
     public void setBlockChain(IBlockChain blockChain, IBlock genesisBlock) {
         this.blockChain = blockChain;
         this.activeBlock = genesisBlock;
+        Transaction transaction = new Transaction("first transaction", "firstTransaction");
+        transaction.setBlockId(0);
+        activeBlock.addTransaction(transaction);
     }
 
     public void addTransaction(ITransaction transaction){
+        transaction.setBlockId(0);
         long unixTimestamp = Instant.now().getEpochSecond();
         long currentEndTime = activeBlock.getEndTime();
         IBlock previousBlock;
@@ -84,6 +89,10 @@ public class InMemoryService {
                 //System.out.println(transaction);
                 allTransactions.add(transaction);
             }
+            for (ITransaction transaction : activeBlock.getAllTransactions()) {
+                //System.out.println(transaction);
+                allTransactions.add(transaction);
+            }
         }
         return allTransactions;
     }
@@ -105,6 +114,15 @@ public class InMemoryService {
             return blockChain.getBlockbyId(id);
         } catch (IndexOutOfBoundsException e) {
             throw new NoSuchElementException(e);
+        }
+    }
+
+    public boolean postTransaction(ITransaction transaction) throws RuntimeException{
+        try {
+            addTransaction(transaction);
+            return true;
+        } catch (RuntimeException e) {
+            throw new RuntimeException(e);
         }
     }
 

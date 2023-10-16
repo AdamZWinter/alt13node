@@ -60,6 +60,12 @@ public class SpringProject372Application {
 		System.out.println(inMemoryService.getAccountByEmail(user1));
 
 		for (int i = 0; i < 100; i++) {
+			try {
+				Thread.sleep((i+2)*1000 + i * 10000);
+			} catch (InterruptedException e) {
+				throw new RuntimeException(e);
+			}
+			startTime = Instant.now().getEpochSecond();
 			SimpleTransaction simpleTransaction = new SimpleTransaction(
 					user1,
 					i+1,
@@ -95,15 +101,6 @@ public class SpringProject372Application {
 
 			HashSet<ITransaction> transactionSet = (HashSet<ITransaction>) inMemoryService.getAllTransactions();
 			System.out.println("Transaction set size: " + transactionSet.size());
-			//System.out.println(inMemoryService.getAccountByEmail(user1));
-			//System.out.println(inMemoryService.getAccountByEmail(user2));
-			//System.out.println(inMemoryService.getAccountByEmail(user3));
-
-			try {
-				Thread.sleep(11000);
-			} catch (InterruptedException e) {
-				throw new RuntimeException(e);
-			}
 
 		}//end for
 

@@ -14,7 +14,7 @@ public class BlockChain implements IBlockChain {
 
     public int addBlock(IBlock block){
         if(listOfBlocks.add(block)){
-            int blockId = listOfBlocks.size() - 1;
+            int blockId = listOfBlocks.size();
             block.setBlockId(blockId);
             Set<ITransaction> transactionSet = block.getAllTransactions();
             for (ITransaction transaction : transactionSet) {

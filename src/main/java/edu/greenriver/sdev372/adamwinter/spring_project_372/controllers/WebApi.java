@@ -1,8 +1,7 @@
 package edu.greenriver.sdev372.adamwinter.spring_project_372.controllers;
 
-import edu.greenriver.sdev372.adamwinter.spring_project_372.models.Account;
-import edu.greenriver.sdev372.adamwinter.spring_project_372.models.Block;
-import edu.greenriver.sdev372.adamwinter.spring_project_372.models.IBlock;
+import com.fasterxml.jackson.databind.JsonNode;
+import edu.greenriver.sdev372.adamwinter.spring_project_372.models.*;
 import edu.greenriver.sdev372.adamwinter.spring_project_372.services.InMemoryService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -10,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.NoSuchElementException;
+import java.util.Set;
 
 /**
  *  This class declares routes to HTTP resources.
@@ -64,6 +64,20 @@ public class WebApi {
         } catch (NoSuchElementException e) {
             return new ResponseEntity<>(new Block(0, 0, "Not Found"), HttpStatus.NOT_FOUND);
         }
+    }
+
+    @PostMapping("transactions")
+    public ResponseEntity<Boolean> postTransaction(@RequestBody Transaction transaction){
+        try {
+            return new ResponseEntity<>(service.postTransaction(transaction), HttpStatus.CREATED);
+        } catch (RuntimeException e) {
+            return new ResponseEntity<>(false, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("transactions")
+    public ResponseEntity<Set<ITransaction>> getAllTransactions(){
+        return new ResponseEntity<>(service.getAllTransactions(),HttpStatus.OK);
     }
 
 
