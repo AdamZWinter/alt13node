@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashSet;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
@@ -66,6 +67,11 @@ public class WebApi {
         }
     }
 
+    /**
+     * Defines a route to GET a block by the Id
+     * @param id the id of the block
+     * @return ResponseEntity<IBlock> HttpStatus OK or NOT_FOUND
+     */
     @GetMapping("blocks/{id}")
     public ResponseEntity<IBlock> getBlockById(@PathVariable int id){
         try {
@@ -75,6 +81,11 @@ public class WebApi {
         }
     }
 
+    /**
+     * Defines a route to POST a new transaction
+     * @param transaction the ITransaction to POST
+     * @return ResponseEntity<Boolean> Http.Status CREATED or INTERNAL_SERVER_ERROR
+     */
     @PostMapping("transactions")
     public ResponseEntity<Boolean> postTransaction(@RequestBody Transaction transaction){
         try {
@@ -84,14 +95,29 @@ public class WebApi {
         }
     }
 
+    /**
+     * Defines a route to GET all transactions
+     * @return ResponseEntity<Set<ITransaction>> Http.Status OK only
+     */
     @GetMapping("transactions")
     public ResponseEntity<Set<ITransaction>> getAllTransactions(){
         return new ResponseEntity<>(service.getAllTransactions(),HttpStatus.OK);
     }
 
+    /**
+     * Defines a route to GET transactions in the active block being built
+     * These are the new transactions in the block that has not been
+     * added to the blockchain yet.
+     * These transactions should have a blockId of zero
+     * @return ResponseEntity<Set<ITransaction>> Http.Status OK or INTERNAL_SERVER_ERROR
+     */
     @GetMapping("transactions/new")
     public ResponseEntity<Set<ITransaction>> getNewTransactions(){
-        return new ResponseEntity<>(service.getNewTransactions(),HttpStatus.OK);
+        try {
+            return new ResponseEntity<>(service.getNewTransactions(),HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(new HashSet<>(),HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
 
