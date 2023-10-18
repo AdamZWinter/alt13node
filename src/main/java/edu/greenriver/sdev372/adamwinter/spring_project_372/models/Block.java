@@ -10,6 +10,9 @@ import java.util.Base64;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ *  A Block is a set of transactions that is appended to the blockchain
+ */
 public class Block implements IBlock{
 
     Set<ITransaction> transactionSet;
@@ -33,6 +36,12 @@ public class Block implements IBlock{
     @Setter
     long blockId;  //this will be -1 until the block is added to the chain
 
+    /**
+     * Constructor
+     * @param startTime The temporal beginning of the blcok
+     * @param endTime  The temporal end of the block
+     * @param previousBlockHash  The SHA256 hash of the toString of the previous block
+     */
     public Block(long startTime, long endTime, String previousBlockHash) {
         this.transactionSet = new HashSet<>();
         this.startTime = startTime;
@@ -41,10 +50,20 @@ public class Block implements IBlock{
         this.blockId = -1;
     }
 
+    /**
+     * Adds a transaction to the block
+     * @param transaction type ITransaction
+     * @return
+     */
     public boolean addTransaction(ITransaction transaction){
         return transactionSet.add(transaction);
     }
 
+    /**
+     * The SHA256 hash of the toString of the block
+     * @return
+     * @throws NoSuchAlgorithmException
+     */
     public String getHash() throws NoSuchAlgorithmException {
         MessageDigest digest = MessageDigest.getInstance("SHA-256");
         String thisBlockString = this.toString();
@@ -53,6 +72,10 @@ public class Block implements IBlock{
         return encoder.encodeToString(hashBytes);
     }
 
+    /**
+     * Get all the transactions in this block
+     * @return Set<ITransaction> The set of transations in this block
+     */
     public Set<ITransaction> getAllTransactions(){
         return transactionSet;
     }

@@ -18,6 +18,10 @@ import java.util.LinkedList;
 public class SpringProject372Application {
 	private static final long BLOCK_TIME = 10; //seconds
 
+	/**
+	 * Main entry point into the Spring Boot application
+	 * @param args not used
+	 */
 	public static void main(String[] args) {
 
 		//SpringApplication.run(SpringProject372Application.class, args);
@@ -25,24 +29,11 @@ public class SpringProject372Application {
 		//ApplicationContext context = SpringApplication.run(SpringProject372Application.class, args);
 		//IAccountsRepository repo = context.getBean(IAccountsRepository.class);
 
-		//Testing without API
+		//The following lines are required to initialize the blockchain and inject dependencies
 		ApplicationContext context = SpringApplication.run(SpringProject372Application.class, args);
 		InMemoryService inMemoryService = context.getBean(InMemoryService.class);
 		inMemoryService.setAccountSet(new HashSet<>());
 		inMemoryService.setBlockTime(BLOCK_TIME);
-
-		String user1 = "user1@email.com";
-		String user2 = "user2@email.com";
-		String user3 = "user3@email.com";
-
-
-		try {
-			inMemoryService.addAccount(new Account(user1, "publicKeyPlaceholder"));
-			inMemoryService.addAccount(new Account(user2, "publicKeyPlaceholder"));
-			inMemoryService.addAccount(new Account(user3, "publicKeyPlaceholder"));
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
 
 		long unixTimestamp = Instant.now().getEpochSecond();
 		//long startTime = unixTimestamp - (unixTimestamp % BLOCK_TIME);
@@ -51,12 +42,25 @@ public class SpringProject372Application {
 		long endTime = unixTimestamp;
 		Block genesisBlock = new Block(startTime, endTime, "Genesis");
 
-		//Java documentation says that LinkedList is a doubly-linked list
-		//and that it searches by index starting at either the head or the tail
+		//LinkedList is a doubly-linked list
+		//and searches by index starting at either the head or the tail
 		//depending on which the index is closer to
 		inMemoryService.setBlockChain(new BlockChain(new LinkedList<>()), genesisBlock);
 
 
+		//All following lines are for testing purposes only
+
+		String user1 = "user1@email.com";
+		String user2 = "user2@email.com";
+		String user3 = "user3@email.com";
+
+		try {
+			inMemoryService.addAccount(new Account(user1, "publicKeyPlaceholder"));
+			inMemoryService.addAccount(new Account(user2, "publicKeyPlaceholder"));
+			inMemoryService.addAccount(new Account(user3, "publicKeyPlaceholder"));
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
 		System.out.println(inMemoryService.getAccountByEmail(user1));
 
 		for (int i = 0; i < 100; i++) {

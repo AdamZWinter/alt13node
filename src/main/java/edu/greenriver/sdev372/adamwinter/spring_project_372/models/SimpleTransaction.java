@@ -8,7 +8,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Getter;
 import lombok.Setter;
 
-
+/**
+ * SimpleTransaction extends Transaction, which implement ITransaction
+ * This is a basic transaction that transfers notes from one account to another
+ */
 public class SimpleTransaction extends Transaction{
 
 //    @Getter
@@ -26,8 +29,18 @@ public class SimpleTransaction extends Transaction{
 
     @Getter
     @Setter
-    private int blockId;  //This will be -1 until the block is added to the chain
+    private int blockId;  //This will be 0 until the block is added to the chain
 
+    /**
+     * Constructor
+     * @param accountId  the email address of the sender
+     * @param transactionId  Like a check number
+     * @param recipientId  the email address of the recipient
+     * @param amount  the amount to send
+     * @param uTime  a time stamp set by the sender
+     * @param extra  additional information to include
+     * @param base64encodedSignature  the base64encoded String signature by the sender
+     */
     public SimpleTransaction(String accountId, int transactionId, String recipientId, double amount, long uTime, String extra, String base64encodedSignature) {
         super();
         Body body = new Body(accountId, transactionId, recipientId, amount, uTime, extra);
