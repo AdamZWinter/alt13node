@@ -58,6 +58,11 @@ public class SpringProject372Application {
 			inMemoryService.addAccount(new Account(user1, "publicKeyPlaceholder"));
 			inMemoryService.addAccount(new Account(user2, "publicKeyPlaceholder"));
 			inMemoryService.addAccount(new Account(user3, "publicKeyPlaceholder"));
+			inMemoryService.addAccount(new Account("user4@gmail.com", "publicKeyPlaceholder"));
+			inMemoryService.addAccount(new Account("user5@email.com", "publicKeyPlaceholder"));
+			inMemoryService.addAccount(new Account("user6@email.com", "publicKeyPlaceholder"));
+			inMemoryService.addAccount(new Account("user7@email.com", "publicKeyPlaceholder"));
+			inMemoryService.saveAllAccountsToDatabase();
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}

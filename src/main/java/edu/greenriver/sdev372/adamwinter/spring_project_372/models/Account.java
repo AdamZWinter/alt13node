@@ -6,6 +6,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.*;
 
+import java.util.UUID;
+
 /**
  * Model for user data
  * @author Adam Winter
@@ -13,13 +15,15 @@ import lombok.*;
  */
 @Entity
 @Data
-//@AllArgsConstructor
 @NoArgsConstructor
 public class Account implements IAccount{
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Getter
     private int id;
 
+    @Setter
     @Getter
     private String email;
 
@@ -27,6 +31,8 @@ public class Account implements IAccount{
     @Getter
     private String publicKey;
 
+    @Setter
+    @Getter
     private double balance;
 
     /**

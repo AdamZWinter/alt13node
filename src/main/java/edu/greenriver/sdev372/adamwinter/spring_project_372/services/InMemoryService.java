@@ -1,7 +1,6 @@
 package edu.greenriver.sdev372.adamwinter.spring_project_372.services;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import edu.greenriver.sdev372.adamwinter.spring_project_372.db.IRepository;
+import edu.greenriver.sdev372.adamwinter.spring_project_372.db.IAccountsRepository;
 import edu.greenriver.sdev372.adamwinter.spring_project_372.models.*;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,19 +11,22 @@ import java.time.Instant;
 import java.util.*;
 
 @Service
-@NoArgsConstructor
 public class InMemoryService {
 
-    //private IAccountsRepository repo;
+    private IAccountsRepository repo;
     private IBlockChain blockChain;
 
     @Setter
-    private Set<IAccount> accountSet;
+    private Set<Account> accountSet;
 
     @Setter
     private long blockTime;
 
     private IBlock activeBlock;
+
+    public InMemoryService(IAccountsRepository repo) {
+        this.repo = repo;
+    }
 
     public void setBlockChain(IBlockChain blockChain, IBlock genesisBlock) {
         this.blockChain = blockChain;
@@ -58,7 +60,7 @@ public class InMemoryService {
         }
     }
 
-    public boolean addAccount(IAccount account) throws Exception{
+    public boolean addAccount(Account account) throws Exception{
         for (IAccount existingAccount : accountSet) {
             if(existingAccount.getEmail().compareTo(account.getEmail()) == 0 ){
                 throw new Exception("Account with this email already exists.");
@@ -74,6 +76,10 @@ public class InMemoryService {
             }
         }
         throw new NoSuchElementException("There is no account with this email address.");
+    }
+
+    public Set<Account> getAccountsAll() throws Exception {
+        return accountSet;
     }
 
     public Set<ITransaction> getNewTransactions(){
@@ -109,6 +115,21 @@ public class InMemoryService {
         throw new NoSuchElementException("No such account.");
     }
 
+    public boolean updateAccountById(Account account) throws NoSuchElementException{
+        Iterator itr = accountSet.iterator();
+        while(itr.hasNext()){
+            Account nextAccount = (Account) itr.next();
+            if(account.getId() == nextAccount.getId()){
+                nextAccount.setEmail(account.getEmail());
+                nextAccount.setPublicKey(account.getPublicKey());
+                nextAccount.setBalance(account.getBalance());
+                repo.save(nextAccount);
+                return true;
+            }
+        }
+        throw new NoSuchElementException("No such account.");
+    }
+
     public IBlock getBlockById(int id) throws NoSuchElementException{
         try {
             return blockChain.getBlockbyId(id);
@@ -124,6 +145,14 @@ public class InMemoryService {
         } catch (RuntimeException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void saveAllAccountsToDatabase(){
+//        List<IAccount> list = new ArrayList<>();
+//        for (IAccount account : accountSet) {
+//            list.add(account);
+//        }
+        repo.saveAll(accountSet);
     }
 
 }

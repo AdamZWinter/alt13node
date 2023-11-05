@@ -1,6 +1,5 @@
 package edu.greenriver.sdev372.adamwinter.spring_project_372.controllers;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import edu.greenriver.sdev372.adamwinter.spring_project_372.models.*;
 import edu.greenriver.sdev372.adamwinter.spring_project_372.services.InMemoryService;
 import lombok.AllArgsConstructor;
@@ -40,6 +39,20 @@ public class WebApi {
     }
 
     /**
+     * defines a route to get all accounts
+     * @return Account
+     */
+    @CrossOrigin
+    @GetMapping(path = "accounts")
+    public ResponseEntity<Object> getAccountAll(){
+        try {
+            return new ResponseEntity<>(service.getAccountsAll(), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    /**
      * defines a route to create an account with POST
      * @param account specified in request body in JSON format
      * @return ResponseEntity<Boolean> CREATED or CONFLICT status
@@ -54,14 +67,15 @@ public class WebApi {
     }
 
     /**
-     * difines a route to PUT/Update the public key for an account
+     * defines a route to PUT/Update the public key for an account
      * @param account specified in request body in JSON format
-     * @return ResponseEntity<Boolean> HttpStatus ACCEPTED or NOT_FOUND
+     * @return ResponseEntity<Boolean> HttpStatus 204 No_Content or NOT_FOUND
      */
+    @CrossOrigin
     @PutMapping(path = "accounts")
-    public ResponseEntity<Boolean> updatePublicKeyByEmail(@RequestBody Account account){
+    public ResponseEntity<Boolean> updateAccountArbitrary(@RequestBody Account account){
         try {
-            return new ResponseEntity<>(service.updatePublicKeyByEmail(account), HttpStatus.ACCEPTED);
+            return new ResponseEntity<>(service.updateAccountById(account), HttpStatus.NO_CONTENT);
         } catch (NoSuchElementException e) {
             return new ResponseEntity<>(false, HttpStatus.NOT_FOUND);
         }
