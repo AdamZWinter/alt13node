@@ -60,13 +60,15 @@ public class InMemoryService {
         }
     }
 
-    public boolean addAccount(Account account) throws Exception{
+    public Account addAccount(Account account) throws Exception{
         for (IAccount existingAccount : accountSet) {
             if(existingAccount.getEmail().compareTo(account.getEmail()) == 0 ){
                 throw new Exception("Account with this email already exists.");
             }
         }
-        return accountSet.add(account);
+        repo.save(account);
+        accountSet.add(account);
+        return account;
     }
 
     public IAccount getAccountByEmail(String email) throws NoSuchElementException {

@@ -57,8 +57,9 @@ public class WebApi {
      * @param account specified in request body in JSON format
      * @return ResponseEntity<Boolean> CREATED or CONFLICT status
      */
+    @CrossOrigin
     @PostMapping(path = "accounts")
-    public ResponseEntity<Boolean> createAccount(@RequestBody Account account){
+    public ResponseEntity<Object> createAccount(@RequestBody Account account){
         try {
             return new ResponseEntity<>(service.addAccount(account), HttpStatus.CREATED);
         } catch (Exception e) {
