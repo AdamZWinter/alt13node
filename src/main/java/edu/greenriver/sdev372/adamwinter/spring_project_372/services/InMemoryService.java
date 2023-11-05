@@ -130,6 +130,46 @@ public class InMemoryService {
         throw new NoSuchElementException("No such account.");
     }
 
+    public boolean deleteAccountUsingId(Account account) throws NoSuchElementException{
+        System.out.println(accountSet.contains(account));
+        try {
+            repo.deleteById(account.getId());
+            boolean removed = accountSet.remove(account);
+            System.out.println(removed);
+        } catch (Exception e) {
+            throw new NoSuchElementException("No such account.");
+        }
+
+        Set<Account> tempSet = new HashSet<>();
+        Iterator<Account> itr = accountSet.iterator();
+        while(itr.hasNext()){
+            Account nextAccount = itr.next();
+            if(account.getId() == nextAccount.getId()){
+                System.out.println(nextAccount +" : "+ nextAccount.hashCode());
+                System.out.println(account +" : "+ account.hashCode());
+                if(account.equals(nextAccount)){
+                    System.out.println("Accounts are equal");
+                }else{
+                    System.out.println("NOT equal");
+                }
+                //repo.delete(nextAccount);
+                //accountSet.remove(nextAccount);
+                System.out.println(accountSet.remove(nextAccount));
+                System.out.println(accountSet.contains(nextAccount));
+                //accountSet.remove(account);
+                //return true;
+            }else{
+                tempSet.add(nextAccount);
+            }
+        }
+        //boolean removed = accountSet.remove(account);
+        //System.out.println(removed);
+        //this.accountSet = new HashSet<>();
+        //System.out.print(accountSet);
+        this.accountSet = tempSet;
+        return true;
+    }
+
     public IBlock getBlockById(int id) throws NoSuchElementException{
         try {
             return blockChain.getBlockbyId(id);

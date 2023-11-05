@@ -82,6 +82,21 @@ public class WebApi {
     }
 
     /**
+     * defines a route to DELETE the public key for an account
+     * @param account specified in request body in JSON format
+     * @return ResponseEntity<Boolean> HttpStatus 204 No_Content or NOT_FOUND
+     */
+    @CrossOrigin
+    @DeleteMapping(path = "accounts")
+    public ResponseEntity<Boolean> deleteAccountArbitrary(@RequestBody Account account){
+        try {
+            return new ResponseEntity<>(service.deleteAccountUsingId(account), HttpStatus.OK);
+        } catch (NoSuchElementException e) {
+            return new ResponseEntity<>(false, HttpStatus.NOT_FOUND);
+        }
+    }
+
+    /**
      * Defines a route to GET a block by the Id
      * @param id the id of the block
      * @return ResponseEntity<IBlock> HttpStatus OK or NOT_FOUND

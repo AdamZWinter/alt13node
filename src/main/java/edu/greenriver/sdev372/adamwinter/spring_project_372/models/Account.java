@@ -6,6 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.*;
 
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -55,5 +56,21 @@ public class Account implements IAccount{
                 ", publicKey='" + publicKey + '\'' +
                 ", balance=" + balance +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this.hashCode() == o.hashCode()) {
+            return true;
+        }
+        if (!(o instanceof Account account)) {
+            return false;
+        }
+        return getId() == account.getId() && Double.compare(getBalance(), account.getBalance()) == 0 && Objects.equals(getEmail(), account.getEmail()) && Objects.equals(getPublicKey(), account.getPublicKey());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getEmail(), getPublicKey(), getBalance());
     }
 }
