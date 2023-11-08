@@ -42,6 +42,6 @@ Additional goals:
 ## How to:
 * Running ./buildfront.sh will pull the submodule repo for the React app frontend, build it, 
   and copy the build into the static resources directory.
-  (You will need to 'npm install', 'npm install react-scripts', and 'npm install react-router-dom' 
+  (You will need to 'npm install', 'npm install react-scripts', 'npm install react-router-dom', and 'npm install crypto-js'
   one time, within the submodule directory, before this script will work).
 
