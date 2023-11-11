@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 cd alt13front
-git pull origin main
+git pull origin prod
 
 #npm install
 #npm install react-scripts
