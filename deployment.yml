@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: alt13
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      keyvalueLabel: alt13tag
+  template:
+    metadata:
+      labels:
+        keyvalueLabel: alt13tag
+    spec:
+      containers:
+        - name: alt13containername
+          image: azcjw2000/alt13
+          ports:
+            - containerPort: 8080
