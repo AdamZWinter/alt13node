@@ -15,4 +15,6 @@
 
 # Target directory for maven builds
 target/
+
+# React frontend repo files
 alt13front/
