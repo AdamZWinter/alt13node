@@ -20,7 +20,7 @@ import java.util.Base64;
  */
 @NoArgsConstructor
 @AllArgsConstructor
-public class Transaction implements ITransaction{
+public class PostedTransaction implements ITransaction{
 
     @Getter
     @Setter
@@ -30,6 +30,9 @@ public class Transaction implements ITransaction{
     private String bodyString;
     @Getter
     private String bodyHash;
+    @Getter
+    @Setter
+    private String bodyHashPosted;
     @Getter
     @Setter
     private String hashType;
@@ -50,11 +53,16 @@ public class Transaction implements ITransaction{
      * @param body this should be a JSON formated String will all the details
      * @param signature the signature of the sender on the transaction
      */
-    public Transaction(String body, String signature, String transactionType) {
+    public PostedTransaction(String body, String bodyHash, String signature, String transactionType) {
         this.bodyString = body;
+        this.bodyHashPosted = bodyHash;
         this.signature = signature;
         this.transactionType = transactionType;
         this.blockId = 0;
+    }
+
+    public boolean verifyHash(){
+        return bodyHashPosted.equals(this.getBodyHashString());
     }
 
     @Override

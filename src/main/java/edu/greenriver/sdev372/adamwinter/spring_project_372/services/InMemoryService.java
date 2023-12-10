@@ -31,7 +31,7 @@ public class InMemoryService {
     public void setBlockChain(IBlockChain blockChain, IBlock genesisBlock) {
         this.blockChain = blockChain;
         this.activeBlock = genesisBlock;
-        Transaction transaction = new Transaction("first transaction", "firstTransaction");
+        Transaction transaction = new Transaction("first transaction", "firstTransaction", "firstTransaction");
         transaction.setBlockId(0);
         activeBlock.addTransaction(transaction);
     }

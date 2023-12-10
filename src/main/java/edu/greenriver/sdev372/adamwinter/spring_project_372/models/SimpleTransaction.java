@@ -1,9 +1,6 @@
 package edu.greenriver.sdev372.adamwinter.spring_project_372.models;
 
-import ch.qos.logback.classic.encoder.JsonEncoder;
-import com.fasterxml.jackson.core.JsonEncoding;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.io.JsonStringEncoder;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Getter;
 import lombok.Setter;
@@ -33,7 +30,7 @@ public class SimpleTransaction extends Transaction{
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
-        super.setBody(bodyString);
+        super.setBodyString(bodyString);
         //super.setSignature(base64encodedSignature);
     }
 
