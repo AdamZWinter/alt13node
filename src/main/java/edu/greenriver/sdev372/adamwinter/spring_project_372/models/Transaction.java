@@ -40,7 +40,7 @@ public class Transaction implements ITransaction{
 
     @Override
     public String toString() {
-        return "Transaction{" +
+        return "{" +
                 "blockId=" + blockId +
                 ", body='" + body + '\'' +
                 ", signature='" + signature + '\'' +

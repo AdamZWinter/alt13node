@@ -81,8 +81,7 @@ public class SpringProject372Application {
 					user2,
 					0.42,
 					startTime,
-					"jsonEncodedObjectGoesHere",
-					"SignaturePlaceholder"
+					"jsonEncodedObjectGoesHere"
 			);
 
 			SimpleTransaction simpleTransaction2 = new SimpleTransaction(
@@ -91,8 +90,7 @@ public class SpringProject372Application {
 					user3,
 					0.42,
 					startTime,
-					"jsonEncodedObjectGoesHere",
-					"SignaturePlaceholder"
+					"jsonEncodedObjectGoesHere"
 			);
 
 			SimpleTransaction simpleTransaction3 = new SimpleTransaction(
@@ -101,8 +99,7 @@ public class SpringProject372Application {
 					user3,
 					0.42,
 					startTime,
-					"jsonEncodedObjectGoesHere",
-					"SignaturePlaceholder"
+					"jsonEncodedObjectGoesHere"
 			);
 			inMemoryService.addTransaction(simpleTransaction);
 			inMemoryService.addTransaction(simpleTransaction2);

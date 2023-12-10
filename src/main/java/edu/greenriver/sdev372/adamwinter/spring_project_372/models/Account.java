@@ -50,7 +50,7 @@ public class Account implements IAccount{
 
     @Override
     public String toString() {
-        return "Account{" +
+        return "{" +
                 "id=" + id +
                 ", email='" + email + '\'' +
                 ", publicKey='" + publicKey + '\'' +

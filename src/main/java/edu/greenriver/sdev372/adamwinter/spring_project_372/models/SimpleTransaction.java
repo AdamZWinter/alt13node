@@ -14,23 +14,6 @@ import lombok.Setter;
  */
 public class SimpleTransaction extends Transaction{
 
-//    @Getter
-//    private String accountId;
-//    private int transactionId;
-//
-//    @Getter
-//    private String recipientId;
-//    private double amount;
-//
-//    @Getter
-//    private long uTime;
-//    private String extra;
-//    private String base64encodedSignature;
-
-    @Getter
-    @Setter
-    private int blockId;  //This will be 0 until the block is added to the chain
-
     /**
      * Constructor
      * @param accountId  the email address of the sender
@@ -39,9 +22,8 @@ public class SimpleTransaction extends Transaction{
      * @param amount  the amount to send
      * @param uTime  a time stamp set by the sender
      * @param extra  additional information to include
-     * @param base64encodedSignature  the base64encoded String signature by the sender
      */
-    public SimpleTransaction(String accountId, int transactionId, String recipientId, double amount, long uTime, String extra, String base64encodedSignature) {
+    public SimpleTransaction(String accountId, int transactionId, String recipientId, double amount, long uTime, String extra) {
         super();
         Body body = new Body(accountId, transactionId, recipientId, amount, uTime, extra);
         ObjectMapper objectMapper = new ObjectMapper();
@@ -52,16 +34,7 @@ public class SimpleTransaction extends Transaction{
             throw new RuntimeException(e);
         }
         super.setBody(bodyString);
-        super.setSignature(base64encodedSignature);
-//        this.accountId = accountId;
-//        this.transactionId = transactionId;
-//        this.recipientId = recipientId;
-//        this.amount = amount;
-//        this.uTime = uTime;
-//        this.extra = extra;
-//        this.base64encodedSignature = base64encodedSignature;
-//        this.blockId = -1;
-
+        //super.setSignature(base64encodedSignature);
     }
 
     private class Body{
@@ -93,6 +66,17 @@ public class SimpleTransaction extends Transaction{
             this.extra = extra;
         }
 
+        @Override
+        public String toString() {
+            return "{" +
+                    "accountId='" + accountId + '\'' +
+                    ", transactionId=" + transactionId +
+                    ", recipientId='" + recipientId + '\'' +
+                    ", amount=" + amount +
+                    ", uTime=" + uTime +
+                    ", extra='" + extra + '\'' +
+                    '}';
+        }
     }
 
 }
