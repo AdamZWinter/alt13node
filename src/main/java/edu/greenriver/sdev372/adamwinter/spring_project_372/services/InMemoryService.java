@@ -31,7 +31,7 @@ public class InMemoryService {
     public void setBlockChain(IBlockChain blockChain, IBlock genesisBlock) {
         this.blockChain = blockChain;
         this.activeBlock = genesisBlock;
-        Transaction transaction = new Transaction("first transaction", "firstTransaction", "firstTransaction");
+        Transaction transaction = new SimpleTransaction("Genesis", 1, "Genesis", 0.0, Instant.now().getEpochSecond(), "Hello world.");
         transaction.setBlockId(0);
         activeBlock.addTransaction(transaction);
     }
@@ -54,6 +54,30 @@ public class InMemoryService {
             }
             activeBlock.addTransaction(transaction);
             blockChain.addBlock(previousBlock);
+
+            for (ITransaction transaction2Apply : previousBlock.getAllTransactions()) {
+                ITransactionBody transactionBody = transaction2Apply.getBody();
+                if(transactionBody.getBodyType().equals("SIMPLE")){
+                    SimpleTransactionBody body = (SimpleTransactionBody) transactionBody;
+                    System.out.println("Type: SIMPLE " + body);
+                    String accountId = body.getAccountId();
+                    String recipient = body.getRecipientId();
+                    double amount = body.getAmount();
+                    for (Account account : this.accountSet) {
+                        if(account.getEmail().equals(accountId)){
+                            double balance = account.getBalance();
+                            account.setBalance(balance - amount);
+                        }
+                        if(account.getEmail().equals(recipient)){
+                            double balance = account.getBalance();
+                            account.setBalance(balance + amount);
+                        }
+                    }
+                }else{
+                    System.out.println("No type match.  Type:  " + transactionBody.getBodyType());
+                }
+            }
+
         }else{
             //System.out.println("Adding to existing block.");
             activeBlock.addTransaction(transaction);

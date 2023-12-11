@@ -1,15 +1,14 @@
 package edu.greenriver.sdev372.adamwinter.spring_project_372.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import org.aspectj.bridge.Message;
-
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * Transaction implements ITransaction
@@ -18,30 +17,25 @@ import java.util.Base64;
  * All the details of the transaction, other than blockId and signature
  * will be contained within the body
  */
-@NoArgsConstructor
-@AllArgsConstructor
 public class Transaction implements ITransaction{
-
+    @Getter
+    @Setter
+    private String transactionType;
+    @Getter
+    @Setter
+    private ITransactionBody body;
     @Getter
     @Setter
     private int blockId;
     @Getter
     @Setter
-    private String bodyString;
-    @Getter
-    private String bodyHash;
-    @Getter
-    @Setter
-    private String hashType;
+    private String hashAlgorithm;
     @Getter
     @Setter
     private String signature;
     @Getter
     @Setter
     private String pki;
-    @Getter
-    @Setter
-    private String transactionType;
 
 
     /**
@@ -50,27 +44,44 @@ public class Transaction implements ITransaction{
      * @param body this should be a JSON formated String will all the details
      * @param signature the signature of the sender on the transaction
      */
-    public Transaction(String body, String signature, String transactionType) {
-        this.bodyString = body;
+    public Transaction(ITransactionBody body, String signature) {
+        this.body = body;
         this.signature = signature;
-        this.transactionType = transactionType;
         this.blockId = 0;
+    }
+
+    /**
+     * NoArgs constructor
+     */
+    public Transaction() {
+        this.hashAlgorithm = "SHA-256";
+        this.pki = "TBD";
     }
 
     @Override
     public String toString() {
-        return "{" +
-                "blockId=" + blockId +
-                ", hash='" + getBodyHashString() + '\'' +
-                ", body='" + bodyString + '\'' +
+        return "Transaction{" +
+                "transactionType='" + transactionType + '\'' +
+                ", body=" + body +
+                ", blockId=" + blockId +
+                ", hashAlgorithm='" + hashAlgorithm + '\'' +
                 ", signature='" + signature + '\'' +
+                ", pki='" + pki + '\'' +
                 '}';
+    }
+
+    public String getTransactionType() {
+        return transactionType;
+    }
+
+    public void setTransactionType(String transactionType) {
+        this.transactionType = transactionType;
     }
 
     public byte[] getBodyHash() {
         try {
-            MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
-            messageDigest.update(this.bodyString.getBytes(StandardCharsets.UTF_8));
+            MessageDigest messageDigest = MessageDigest.getInstance(this.hashAlgorithm);
+            messageDigest.update(body.toString().getBytes(StandardCharsets.UTF_8));
             return messageDigest.digest();
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
@@ -80,7 +91,7 @@ public class Transaction implements ITransaction{
     public String getBodyHashString(){
         byte[] bytes = this.getBodyHash();
         Base64.Encoder base64encdoer = Base64.getEncoder();
-        String hash = base64encdoer.encodeToString(bytes);
-        return hash;
+        return base64encdoer.encodeToString(bytes);
     }
+
 }

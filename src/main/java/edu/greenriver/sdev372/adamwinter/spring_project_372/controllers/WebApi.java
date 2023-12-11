@@ -113,13 +113,15 @@ public class WebApi {
 
     /**
      * Defines a route to POST a new transaction
-     * @param transaction the ITransaction to POST
+     * @param transaction the PostedSimpleTransaction included as requestbody in POST
      * @return ResponseEntity<Boolean> Http.Status CREATED or INTERNAL_SERVER_ERROR
      */
     @PostMapping("transactions")
-    public ResponseEntity<Boolean> postTransaction(@RequestBody Transaction transaction){
+    public ResponseEntity<Boolean> postTransaction(@RequestBody PostedSimpleTransaction transaction){
+    //public ResponseEntity<Boolean> postTransaction(){
         try {
             return new ResponseEntity<>(service.postTransaction(transaction), HttpStatus.CREATED);
+            //return new ResponseEntity<>(true, HttpStatus.CREATED);
         } catch (RuntimeException e) {
             return new ResponseEntity<>(false, HttpStatus.INTERNAL_SERVER_ERROR);
         }

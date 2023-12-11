@@ -32,6 +32,12 @@ public class BlockChain implements IBlockChain {
             Set<ITransaction> transactionSet = block.getAllTransactions();
             for (ITransaction transaction : transactionSet) {
                 transaction.setBlockId(blockId);
+//                ITransactionBody transactionBody = transaction.getBody();
+//                if(transactionBody.getBodyType().equals("SIMPLE")){
+//                    //System.out.println("Type: SIMPLE " + transactionBody);
+//                }else{
+//                    System.out.println("No type match.  Type:  " + transactionBody.getBodyType());
+//                }
             }
             return blockId;
         }else{

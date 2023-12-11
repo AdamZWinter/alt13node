@@ -4,8 +4,8 @@ public interface ITransaction {
     void setBlockId(int blockId);
     int getBlockId();
 
-    void setBodyString(String bodyString);
-    String getBodyString();
+    //void setBody(Object body);
+    ITransactionBody getBody();
 
     void setSignature(String signature);
     String getSignature();
