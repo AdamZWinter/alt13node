@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.security.NoSuchAlgorithmException;
 import java.time.Instant;
 import java.util.*;
@@ -66,11 +68,11 @@ public class InMemoryService {
                     for (Account account : this.accountSet) {
                         if(account.getEmail().equals(accountId)){
                             double balance = account.getBalance();
-                            account.setBalance(balance - amount);
+                            account.setBalance(roundDouble(balance - amount, 2));
                         }
                         if(account.getEmail().equals(recipient)){
                             double balance = account.getBalance();
-                            account.setBalance(balance + amount);
+                            account.setBalance(roundDouble(balance + amount, 2));
                         }
                     }
                 }else{
@@ -194,6 +196,14 @@ public class InMemoryService {
 
     public void saveAllAccountsToDatabase(){
         repo.saveAll(accountSet);
+    }
+
+    public static double roundDouble(double value, int places) {
+        if (places < 0) throw new IllegalArgumentException();
+
+        BigDecimal bd = BigDecimal.valueOf(value);
+        bd = bd.setScale(places, RoundingMode.HALF_UP);
+        return bd.doubleValue();
     }
 
 }

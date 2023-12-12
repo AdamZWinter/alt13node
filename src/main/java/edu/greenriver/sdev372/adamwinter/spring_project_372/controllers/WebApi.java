@@ -118,7 +118,7 @@ public class WebApi {
      */
     @PostMapping("transactions")
     public ResponseEntity<Boolean> postTransaction(@RequestBody PostedSimpleTransaction transaction){
-    //public ResponseEntity<Boolean> postTransaction(){
+        System.out.println("POSTED TRANSACTION:  " + transaction);
         try {
             return new ResponseEntity<>(service.postTransaction(transaction), HttpStatus.CREATED);
             //return new ResponseEntity<>(true, HttpStatus.CREATED);
